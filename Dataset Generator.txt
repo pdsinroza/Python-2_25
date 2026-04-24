@@ -1,0 +1,30 @@
+import numpy as np
+import pandas as pd
+
+np.random.seed(42)
+n = 300
+
+study_hours    = np.random.uniform(1, 10, n)
+sleep_hours    = np.random.uniform(4, 9,  n)
+practice_tests = np.random.randint(0, 6,  n)
+attendance_pct = np.random.uniform(50, 100, n)
+
+# Ground-truth decision rule (with realistic noise)
+score = (
+    0.35 * (study_hours / 10)    +
+    0.25 * (sleep_hours / 9)     +
+    0.25 * (practice_tests / 5) +
+    0.15 * (attendance_pct / 100)
+)
+passed = (score + np.random.normal(0, 0.08, n) > 0.5).astype(int)
+
+df = pd.DataFrame({
+    'study_hours':    study_hours.round(1),
+    'sleep_hours':    sleep_hours.round(1),
+    'practice_tests': practice_tests,
+    'attendance_pct': attendance_pct.round(1),
+    'passed':         passed
+})
+
+print(df.head(8).to_string(index=False))
+print(f"\nPass rate: {passed.mean():.1%} | Shape: {df.shape}")
