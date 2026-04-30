@@ -1,0 +1,7 @@
+url1 = 'https://drive.google.com/file/d/1iKZGLZ3tHMD62q3ArreavM5b69Vfksm8/view?usp=drive_link'
+url2 = 'https://drive.google.com/file/d/1bk8S1HOrpbOSoV39LBfw-Fvtnbl4d9Jh/view?usp=drive_link'
+path1 = 'https://drive.google.com/uc?export=download&id='+url1.split('/')[-2]
+path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
+
+train_df = pd.read_csv(path1)
+valid_df = pd.read_csv(path2)
